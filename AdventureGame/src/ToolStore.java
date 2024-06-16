@@ -1,6 +1,6 @@
 public class ToolStore extends NormalLocation{
-    public ToolStore(Player player, String name) {
-        super(player, name);
+    public ToolStore(Player player) {
+        super(player, "Tool Store");
     }
 
     @Override

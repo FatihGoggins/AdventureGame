@@ -1,5 +1,5 @@
 public class SafeHouse extends NormalLocation{
-    public SafeHouse(Player player, String name) {
+    public SafeHouse(Player player) {
         super( player, "Safe House");
     }
 

@@ -84,13 +84,6 @@ public class Player {
             }
         }
     }
-
-    public void selectLocation() {
-        System.out.println("Areas:");
-        System.out.println("");
-        System.out.println("Please select a place to go: ");
-    }
-
     public void initPlayer(CharacterRole characterRole) {
         this.setHealth(characterRole.getHealth());
         this.setDamage(characterRole.getDamage());
