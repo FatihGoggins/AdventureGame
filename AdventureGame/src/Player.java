@@ -6,56 +6,17 @@ public class Player {
     private int damage;
     private int money;
     private String charClass;
+    private Inventory inventory;
     Scanner scanner = new Scanner(System.in);
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    public Player(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCharClass() {
-        return charClass;
-    }
-
-    public void setCharClass(String charClass) {
-        this.charClass = charClass;
-    }
 
     public void selectCharacter() {
         CharacterRole[] roles = {new Samurai(), new Archer(), new Knight()};
         System.out.println("/--------------- Game Classes ---------------\\");
         for (CharacterRole role : roles) {
             System.out.println(role.getId() + " - " + role.getClassName() + "\t"
-            + "( Health: " + role.getHealth() + " "
-            + "Damage: " + role.getDamage() + " "
-            + "Money: " + role.getMoney() + " )");
+                    + "( Health: " + role.getHealth() + " "
+                    + "Damage: " + role.getDamage() + " "
+                    + "Money: " + role.getMoney() + " )");
         }
         System.out.println("----------------------------------------------------------------");
         boolean isClassSelected = false;
@@ -64,15 +25,15 @@ public class Player {
             isClassSelected = true;
 
             System.out.print("Select your Character: ");
-            int selectedCharacter = scanner.nextInt();
+            String selectedCharacter = scanner.next();
             switch (selectedCharacter) {
-                case 1:
+                case "1":
                     this.initPlayer(new Samurai());
                     break;
-                case 2:
+                case "2":
                     this.initPlayer(new Archer());
                     break;
-                case 3:
+                case "3":
                     this.initPlayer(new Knight());
                     break;
                 default:
@@ -94,8 +55,72 @@ public class Player {
     public void playerInfo() {
         System.out.println("Name: " + this.getName());
         System.out.println("Class: " + this.getCharClass());
-        System.out.println("Health: " + this.getHealth());
-        System.out.println("Damage: " + this.getDamage());
-        System.out.println("Money: " + this.getMoney());
+        System.out.println("Health: " + this.getHealth() + " | "
+                + "Damage: " + this.getTotalDamage() + " | "
+                + "Money: " + this.getMoney() + " | "
+                + "Block: " + this.getInventory().getArmor().getBlock());
+        System.out.println("Weapon: " + this.getInventory().getWeapon().getName());
+        System.out.println("Armor: " + this.getInventory().getArmor().getName());
+    }
+
+    public Player(String name) {
+        this.name = name;
+        this.inventory = new Inventory();
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getDamage() {
+        return this.damage;
+    }
+
+    public int getTotalDamage() {
+        return this.damage + this.getInventory().getWeapon().getDamage();
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCharClass() {
+        return charClass;
+    }
+
+    public void setCharClass(String charClass) {
+        this.charClass = charClass;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Weapon getWeapon() {
+        return this.getInventory().getWeapon();
+    }
+
+    public Armor getArmor() {
+        return this.getInventory().getArmor();
     }
 }

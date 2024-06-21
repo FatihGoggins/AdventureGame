@@ -1,6 +1,14 @@
+import java.util.Scanner;
+
 public abstract class Location {
     private String name;
     private  Player player;
+    protected Scanner scanner = new Scanner(System.in);
+
+    public Location( Player player, String name) {
+        this.name = name;
+        this.player = player;
+    }
 
     public abstract boolean onLocation();
 
@@ -20,8 +28,5 @@ public abstract class Location {
         this.player = player;
     }
 
-    public Location( Player player, String name) {
-        this.name = name;
-        this.player = player;
-    }
+
 }
