@@ -75,6 +75,13 @@ public class ToolStore extends NormalLocation{
                 if (weapon.getPrice() > this.getPlayer().getMoney()) {
                     System.out.println("You do not have enough money!!!");
                     System.out.println("----------------------------------------------------------------");
+
+                } else if (weapon.getName().equals(this.getPlayer().getWeapon().getName())) {
+                    System.out.println("You already have " + weapon.getName() + " in your inventory");
+                    System.out.println("----------------------------------------------------------------");
+                } else if (weapon.getDamage() < this.getPlayer().getWeapon().getDamage()) {
+                    System.out.println("You have a better weapon");
+                    System.out.println("----------------------------------------------------------------");
                 } else {
                     System.out.println("Cost: " + weapon.getPrice());
                     System.out.println("You have purchased ~| " + weapon.getName() + " |~");
@@ -118,13 +125,19 @@ public class ToolStore extends NormalLocation{
             if (Armor.armors().length + 1 == Integer.parseInt(armorSelection)) {
                 System.out.println("You do not know what you miss...");
                 System.out.println("----------------------------------------------------------------");
-            } else if (Armor.gerArmorById(armorSelection) != null) {
+            }  else if (Armor.gerArmorById(armorSelection) != null) {
                 armor = Armor.armors()[Integer.parseInt(armorSelection) - 1];
                 System.out.println("Your selection: " + armor.getName());
                 System.out.println("----------------------------------------------------------------");
 
                 if (armor.getPrice() > this.getPlayer().getMoney()) {
                     System.out.println("You do not have enough money!!!");
+                    System.out.println("----------------------------------------------------------------");
+                } else if (armor.getName().equals(this.getPlayer().getArmor().getName())) {
+                    System.out.println("You already have " + armor.getName() + " in your inventory");
+                    System.out.println("----------------------------------------------------------------");
+                } else if (armor.getBlock() < this.getPlayer().getArmor().getBlock()) {
+                    System.out.println("You have a better armor");
                     System.out.println("----------------------------------------------------------------");
                 } else {
                     System.out.println("Cost: " + armor.getPrice());

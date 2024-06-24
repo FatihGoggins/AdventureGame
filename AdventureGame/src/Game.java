@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
@@ -28,15 +29,21 @@ public class Game {
         System.out.println("----------------------------------------------------------------");
 
         while (isGameOn) {
+            if (player.getInventory().isLootFull()) {
+                System.out.println("!!!You gathered all Treasures adventurer!!!");
+                System.out.println("/--------------------------- YOU WIN ---------------------------\\");
+                break;
+            }
             player.playerInfo();
             Location location = null;
             System.out.println("/--------------- Areas ---------------\\");
             System.out.println("0 - Exit Game");
             System.out.println("1 - Safe House: There are no monsters here.");
             System.out.println("2 - Tool Store: You can buy armor and weapons.");
-            System.out.println("3 - Cave (Monster: Zombie | Reward: Food)");
-            System.out.println("4 - Forest (Monster: Vampire | Reward: Firewood)");
-            System.out.println("5 - River: (Monster: Bear | Reward: Water)");
+            System.out.println("3 - Cave (Monster: Zombie | Loot: Food)");
+            System.out.println("4 - Forest (Monster: Vampire | Loot: Firewood)");
+            System.out.println("5 - River: (Monster: Bear | Loot: Water)");
+            System.out.println("6 - Mine: (Monster: Snake)");
             System.out.println("----------------------------------------------------------------");
 
             boolean isLocationSelected = false;
@@ -58,16 +65,18 @@ public class Game {
                         location = new ToolStore(player);
                         break;
                     case "3":
-                        location = new Cave(player);
+                            location = new Cave(player);
                         break;
                     case "4":
-                        location = new Forest(player);
+                            location = new Forest(player);
                         break;
                     case "5":
-                        location = new River(player);
+                            location = new River(player);
+                        break;
+                    case "6":
+                        location = new Mine(player);
                         break;
                     default:
-                        System.out.println("----------------------------------------------------------------");
                         System.out.println("Please select a valid area!!!");
                         System.out.println("----------------------------------------------------------------");
                         isLocationSelected = false;
@@ -75,15 +84,17 @@ public class Game {
 
                 }
             }
-            if (location == null) {
+            if (location == null && player.getInventory().isLootEmpty()) {
                 System.out.println("You Gave Up Quickly");
                 System.out.println("----------------------------------------------------------------");
-            } else if (!location.onLocation()) {
-                System.out.println("You Died");
+            } else if (location != null && !location.onLocation()) {
+                System.out.println();
+                System.out.println("/--------------------------- YOU DIED ---------------------------\\");
+                System.out.println("/--------------------------- GAME OVER --------------------------\\");
+                System.out.println("");
                 System.out.println("Game Over");
                 break;
             }
         }
-
     }
 }

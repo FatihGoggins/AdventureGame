@@ -27,6 +27,4 @@ public abstract class Location {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-
 }

@@ -8,6 +8,7 @@ public class SafeHouse extends NormalLocation{
         System.out.println("You are in the Safe House.");
         System.out.println("Your health is restored.");
         System.out.println("----------------------------------------------------------------");
+        this.getPlayer().setHealth(this.getPlayer().getInitialHealth());
         return true;
     }
 }

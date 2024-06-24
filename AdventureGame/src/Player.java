@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Player {
     private final String name;
     private int health;
+    private int initialHealth;
     private int damage;
     private int money;
     private String charClass;
@@ -47,6 +48,7 @@ public class Player {
     }
     public void initPlayer(CharacterRole characterRole) {
         this.setHealth(characterRole.getHealth());
+        this.setInitialHealth(characterRole.getHealth());
         this.setDamage(characterRole.getDamage());
         this.setMoney(characterRole.getMoney());
         this.setCharClass(characterRole.getClassName());
@@ -61,6 +63,19 @@ public class Player {
                 + "Block: " + this.getInventory().getArmor().getBlock());
         System.out.println("Weapon: " + this.getInventory().getWeapon().getName());
         System.out.println("Armor: " + this.getInventory().getArmor().getName());
+        System.out.print("Looted Items: { ");
+
+        for (int i = 0; i < this.getInventory().getLootedItems().length; i++) {
+            String lootedItem = this.getInventory().getLootedItems()[i];
+            if(lootedItem != null ) {
+                if (i == 0) {
+                    System.out.print(lootedItem);
+                } else {
+                    System.out.print(", " + lootedItem);
+                }
+            }
+        }
+        System.out.println(" }");
     }
 
     public Player(String name) {
@@ -73,7 +88,18 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        if (health < 0) {
+            health = 0;
+        }
         this.health = health;
+    }
+
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
     }
 
     public int getDamage() {

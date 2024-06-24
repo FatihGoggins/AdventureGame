@@ -2,13 +2,15 @@ public abstract class Monster {
     private String name;
     private String id;
     private int health;
+    private int originalHealth;
     private int damage;
     private int reward;
 
-    public Monster(String name, String id, int health, int damage, int reward) {
+    public Monster(String name, String id, int health, int defaultHealth, int damage, int reward) {
         this.name = name;
         this.id = id;
         this.health = health;
+        this.originalHealth = defaultHealth;
         this.damage = damage;
         this.reward = reward;
     }
@@ -33,8 +35,17 @@ public abstract class Monster {
         return health;
     }
 
+    public int getOriginalHealth() {
+        return originalHealth;
+    }
+
+    public void setOriginalHealth(int originalHealth) {
+        this.originalHealth = originalHealth;
+    }
+
     public void setHealth(int health) {
-        this.health = health;
+        if (health < 0) health = 0;
+            this.health = health;
     }
 
     public int getDamage() {
