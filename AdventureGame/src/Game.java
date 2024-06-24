@@ -91,7 +91,6 @@ public class Game {
                 System.out.println();
                 System.out.println("/--------------------------- YOU DIED ---------------------------\\");
                 System.out.println("/--------------------------- GAME OVER --------------------------\\");
-                System.out.println("");
                 System.out.println("Game Over");
                 break;
             }
